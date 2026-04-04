@@ -1,26 +1,37 @@
 package models;
-public class MotorbikeInstance {
-    private String vin; 
-    private String engineNumber;
-    private int versionId;
-    private String status;
-    private String importDate;
+import java.sql.Date;
 
-    public MotorbikeInstance(String vin, String engineNumber, int versionId, String importDate) {
+import models.MotorbikeVersion;
+
+enum Status {
+    IN_STOCK, SOLD //các giá trị cố định của kiểu status
+}
+public class MotorbikeInstance {
+    private String vin;
+    private String engineNumber;
+    private Status status;
+    private MotorbikeVersion version;
+    private Date importDate;
+
+    public MotorbikeInstance(String vin, String engineNumber,MotorbikeVersion version, Date importDate) {
         this.vin = vin;
         this.engineNumber = engineNumber;
-        this.versionId = versionId;
+        this.version=version;
+        this.status = Status.IN_STOCK;
         this.importDate = importDate;
-        this.status = "IN_STOCK"; 
-    }
 
-    // Method cũng phải có thân hàm { }
-    public void updateStatus(String newStatus) {
-        this.status = newStatus;
     }
+    public MotorbikeVersion getversion(){
+        return version;
+    }
+    public String getVin() { return vin; }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 
-    // Đừng quên tạo Getter để Service có thể lấy dữ liệu
-    public String getVin() {
-        return vin;
+    @Override
+    public String toString() {
+        return "VIN: " + vin +" | Engine: " + engineNumber +
+        " | bikename: " + version.getmodel().getmodelname() +
+         " | Color: " + version.getcolor() + " | Status: " + status;
     }
 }

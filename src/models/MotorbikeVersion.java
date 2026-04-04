@@ -1,20 +1,24 @@
 package models;
+import models.MotorbikeModel;
+
 public class MotorbikeVersion {
     private int id;
-    private int modelId;
-    private String versionName;
-    private String color;
-    private String engineCapacity;
-    private int basePrice;
-
-    public MotorbikeVersion(int id, int modelId, String name, String color, int price) {
-        this.id = id;
-        this.modelId = modelId;
-        this.versionName = name;
-        this.color = color;
-        this.basePrice = price;
+    private String color;// màu xe
+    private String engineCapacity;// phân khối
+    private String price;// giá
+    private MotorbikeModel model;
+    public MotorbikeVersion(int id, String color,String engineCapacity,String price, MotorbikeModel model){
+        this.id=id;
+        this.color=color;
+        this.engineCapacity=engineCapacity;
+        this.price=price;
+        this.model=model;
     }
-
+    public int getId() { return id; }   
+    public MotorbikeModel getmodel(){return model;}
+    public String getcolor(){return color;}
+    public String getengineCapacity(){return engineCapacity;}
+    public String getprice(){return price;}
     // Getter
 
 }
