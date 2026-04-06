@@ -6,6 +6,7 @@ import models.PurchaseOrder;
 import models.SaleOrder;
 import models.SaleOrderDetail;
 import models.WarrantyBook;
+import models.WarrantyVisit;
 import services.CustomerService;
 import services.MotorImportService;
 import services.checkStatusWareHouse;
@@ -22,116 +23,152 @@ enum Status {
 public class Main {
     public static void main(String[] args) {
         
-        // giả sử có db: cua hang:
+        // // giả sử có db: cua hang:
 
-        MotorImportService kho1= new MotorImportService();
+        // MotorImportService kho1= new MotorImportService();
 
-        // 1. nhap xe vao kho
+        // // 1. nhap xe vao kho
 
-        // nhap xe:
-        MotorbikeModel model1 = new MotorbikeModel(1, "Vision", "Honda", "Sport", "Xe tay ga phổ thông, phù hợp với mọi đối tượng khách hàng.");
-        MotorbikeVersion version1 = new MotorbikeVersion("Xanh đen", "125cc", "35 triệu", model1);
-        MotorbikeInstance bike1 = new MotorbikeInstance("VIN-V01", "ENG-V001", version1, java.time.LocalDate.of(2026, 4, 1));
+        // // nhap xe:
+        // MotorbikeModel model1 = new MotorbikeModel(1, "Vision", "Honda", "Sport", "Xe tay ga phổ thông, phù hợp với mọi đối tượng khách hàng.");
+        // MotorbikeVersion version1 = new MotorbikeVersion("Xanh đen", "125cc", "35 triệu", model1);
+        // MotorbikeInstance bike1 = new MotorbikeInstance("VIN-V01", "ENG-V001", version1, java.time.LocalDate.of(2026, 4, 1));
 
-        kho1.importMotor(bike1);
+        // kho1.importMotor(bike1);
 
-        // hoa don nhap xe:
-        PurchaseOrder po1 = new PurchaseOrder(1001, "Honda Vietnam", java.time.LocalDate.of(2026, 4, 1));
-        kho1.doPurchase(po1);
+        // // hoa don nhap xe:
+        // PurchaseOrder po1 = new PurchaseOrder(1001, "Honda Vietnam", java.time.LocalDate.of(2026, 4, 1));
+        // kho1.doPurchase(po1);
 
-        // 2. kiem tra ton kho
-        checkStatusWareHouse wareHouse = new checkStatusWareHouse();
-        wareHouse.checkStatus("Vision", kho1);
+        // // 2. kiem tra ton kho
+        // checkStatusWareHouse wareHouse = new checkStatusWareHouse();
+        // wareHouse.checkStatus("Vision", kho1);
 
-        // 5. tao khach hang
+        // // 5. tao khach hang
 
-        Customer DangBao = new Customer("Dang Bao", "0901234567", 1, "079012345678", LocalDate.of(1990, 1, 1), "123 Nguyen Trai, HN", "dangbao@hehe.com");
-        // quan ly khach hang
-        CustomerService customerService = new CustomerService();
-        customerService.addCustomer(DangBao);
-
-        // 3. ban xe cho Dang Bao
-        SaleOrderDetail sale1 = new SaleOrderDetail(1, "VIN-V01", 36000000);
-        bike1.setStatusSold();
-        DangBao.updatePurchaseHistory(sale1);
-        WarrantyBook warranty1 = new WarrantyBook("VIN-V01", 1, LocalDate.of(2026, 4, 4), LocalDate.of(2029, 4, 4));
-
-
-        // 4. bao hanh xe cho Dang Bao
-        
-
-
-
-        // System.out.println("--- KHOI DONG HE THONG QUAN LY CUA HANG XE MAY ---\n");
-
-        // //b1: khoi tao du lieu
-        // System.out.println("--- 1. Khoi tao danh muc xe ---");
-        // // Constructor: modelId, modelName, branch
-        // MotorbikeModel modelVision = new MotorbikeModel(1, "Vision", "Honda");
-        // MotorbikeModel modelExciter = new MotorbikeModel(2, "Exciter", "Yamaha");
-
-        // // Constructor: id, modelId, versionName, color, basePrice
-        // MotorbikeVersion visionCaoCap = new MotorbikeVersion(101, 1, "Vision Cao Cấp", "Xanh đen", 35000000);
-        // MotorbikeVersion exciter155 = new MotorbikeVersion(102, 2, "Exciter 155 VVA", "Xanh GP", 50000000);
-        // System.out.println("-> Da tao danh muc Model va Version thanh cong!\n");
-
-        // //b2: nhap kho
-        // System.out.println("--- 2. Nhap xe vao kho ---");
-        // MotorImportService importService = new MotorImportService();
-        
-        // // Tạo hóa đơn nhập hàng từ nhà cung cấp
-        // // Constructor: id, supplier, orderDate, totalAmount
-        // PurchaseOrder po1 = new PurchaseOrder(1001, "Honda Vietnam", "2026-04-01", 70000000);
-        // importService.doPurchase(po1);
-
-        // // Tạo các instance của xe (thực tế nhập về kho)
-        // // Constructor: vin, engineNumber, versionId, importDate (Status tự động là IN_STOCK)
-        // MotorbikeInstance bike1 = new MotorbikeInstance("VIN-V01", "ENG-V001", 101, "2026-04-01");
-        // MotorbikeInstance bike2 = new MotorbikeInstance("VIN-E01", "ENG-E001", 102, "2026-04-01");
-        
-        // importService.importMotor(bike1);
-        // importService.importMotor(bike2);
-        // System.out.println("-> Da nhap kho 2 chiec xe.");
-        // System.out.println("-> Ma VIN xe 1: " + bike1.getVin() + " | Trang thai: IN_STOCK\n");
-
-        // //b3: quan ly khach hang
-        // System.out.println("--- 3. Tiep nhan khach hang ---");
+        // Customer DangBao = new Customer("Dang Bao", "0901234567", 1, "079012345678", LocalDate.of(1990, 1, 1), "123 Nguyen Trai, HN", "dangbao@hehe.com");
+        // // quan ly khach hang
         // CustomerService customerService = new CustomerService();
-        
-        // // Constructor: id, identityCard, fullName, phone
-        // Customer customer1 = new Customer(1, "079012345678", "Thiago", "0901234567");
-        // customerService.addCustomer(customer1);
-        // System.out.println("-> Da luu thong tin khach hang moi: Thiago\n");
+        // customerService.addCustomer(DangBao);
 
-        // //b4: quan ly khach hang
-        // System.out.println("--- 4. Xu ly đơn ban hang ---");
-        // // Thiago quyết định mua chiếc Vision (VIN-V01)
-        // // Constructor SaleOrder: id, customerId, orderDate, totalAmount (PaymentStatus tự động PAID)
-        // SaleOrder saleOrder = new SaleOrder(5001, 1, "2026-04-04", 36000000);
-        
-        // // Constructor SaleOrderDetail: id, orderId, vin, salePrice
-        // SaleOrderDetail orderDetail = new SaleOrderDetail(1, saleOrder.getId(), bike1.getVin(), 36000000);
-        
-        // // Cập nhật trạng thái chiếc xe đã bán thành SOLD
-        // bike1.updateStatus("SOLD");
-        // System.out.println("-> Da xuat hoa đon #" + saleOrder.getId() + " cho chiec xe: " + orderDetail.getVin());
-        // System.out.println("-> Trang thai xe " + bike1.getVin() + " tren he thong da cap nhat thanh: SOLD\n");
+        // // 3. ban xe cho Dang Bao
+        // SaleOrderDetail sale1 = new SaleOrderDetail(1, "VIN-V01", 36000000);
+        // bike1.setStatusSold();
+        // DangBao.updatePurchaseHistory(sale1);
+        // WarrantyBook warranty1 = new WarrantyBook("VIN-V01", 1, LocalDate.of(2026, 4, 4), LocalDate.of(2029, 4, 4));
 
-        // //b5: quan ly bao hanh
-        // System.out.println("--- 5. Cap so va ghi nhan lich su bao hanh ---");
-        // // Constructor WarrantyBook: id, vin, customerId, issueDate, expDate
-        // WarrantyBook warrantyBook = new WarrantyBook(1, bike1.getVin(), 1, "2026-04-04", "2029-04-04");
-        
-        // System.out.print("-> ");
-        // warrantyBook.checkWarranty(); // Gọi hàm in ra "Dang kiem tra han bao hanh..."
 
-        // // Một tháng sau, khách mang xe đến bảo dưỡng định kỳ
-        // // Constructor WarrantyVisit: id, warrantyBookId, visitDate, kmReading, description
-        // WarrantyVisit visit1 = new WarrantyVisit(1, 1, "2026-05-04", 1000, "Bảo dưỡng lần 1, thay nhớt định kỳ");
-        // visit1.setTechnicianNotes("Xe chay em, đong co va phanh hoat đong tot.");
+        // // 4. bao hanh xe cho Dang Bao
+
+        System.out.println("======================================================");
+        System.out.println("   DEMO CHƯƠNG TRÌNH QUẢN LÝ CỬA HÀNG BÁN XE GẮN MÁY   ");
+        System.out.println("======================================================\n");
+
+        // ---------------------------------------------------------
+        // 1. nhập hàng & quản lý kho xe
+        // ---------------------------------------------------------
+        System.out.println("--- BƯỚC 1: NHẬP XE VÀO KHO ---");
+        MotorImportService khoXe = new MotorImportService();
+
+        // tạo hóa đơn nhập hàng
+        PurchaseOrder po1 = new PurchaseOrder(1001, "Honda Vietnam", LocalDate.of(2026, 4, 1));
+        khoXe.doPurchase(po1);
+
+        // khởi tạo danh mục xe (Model & Version)
+        MotorbikeModel modelVision = new MotorbikeModel(1, "Vision", "Honda", "Tay ga", "Xe tay ga phổ thông, phù hợp với mọi đối tượng khách hàng.");
+        MotorbikeVersion versionVision = new MotorbikeVersion("Xanh đen", "125cc", "35 triệu", modelVision);
+
+        MotorbikeModel modelExciter = new MotorbikeModel(2, "Exciter 155", "Yamaha", "Côn tay", "Xe côn tay thể thao");
+        MotorbikeVersion versionExciter = new MotorbikeVersion("Xanh GP", "155cc", "50 triệu", modelExciter);
+
+        // nhập các chiếc xe thực tế (Instance) vào kho
+        MotorbikeInstance bike1 = new MotorbikeInstance("VIN-V01", "ENG-V001", versionVision, LocalDate.of(2026, 4, 1));
+        MotorbikeInstance bike2 = new MotorbikeInstance("VIN-V02", "ENG-V002", versionVision, LocalDate.of(2026, 4, 1));
+        MotorbikeInstance bike3 = new MotorbikeInstance("VIN-E01", "ENG-E001", versionExciter, LocalDate.of(2026, 4, 2));
+
+        khoXe.importMotor(bike1);
+        khoXe.importMotor(bike2);
+        khoXe.importMotor(bike3);
         
-        // System.out.println("-> Ghi nhan lich su: " + visit1.getDescription());
+        System.out.println("Đã nhập kho 3 chiếc xe.");
+        System.out.println("Danh sách xe hiện tại trong kho:");
+        khoXe.showListMotor();
+
+
+        // ---------------------------------------------------------
+        // 2. KIỂM TRA TỒN KHO THEO MẪU XE
+        // ---------------------------------------------------------
+        System.out.println("\n--- BƯỚC 2: KIỂM TRA TÌNH TRẠNG KHO ---");
+        checkStatusWareHouse wareHouse = new checkStatusWareHouse();
+        System.out.println("Tìm xe Vision trong kho:");
+        wareHouse.checkStatus("Vision", khoXe); // test ok
+
+        System.out.println("Tìm xe Exciter trong kho:");
+        wareHouse.checkStatus("Exciter 155", khoXe); // test ok
+
+        System.out.println("Tìm xe Yamaha trong kho:");
+        wareHouse.checkStatus("Yamaha", khoXe); // test trường hợp ko có xe trong kho
+
+        // ---------------------------------------------------------
+        // 3. QUẢN LÝ KHÁCH HÀNG
+        // ---------------------------------------------------------
+        System.out.println("\n--- BƯỚC 3: TIẾP NHẬN KHÁCH HÀNG MỚI ---");
+        CustomerService customerService = new CustomerService();
         
-        // System.out.println("\n=== HOAN TAT DEMO LUONG CHINH CUA CHUONG TRINH ===");
+        Customer khachHang1 = new Customer("Đăng Bảo", "0901234567", 1, "079012345678", LocalDate.of(1990, 1, 1), "123 Nguyen Trai, HN", "dangbao@hehe.com");
+        customerService.addCustomer(khachHang1);
+        System.out.println("Đã lưu thông tin khách hàng:");
+        khachHang1.showInforCustomer();
+
+
+        // ---------------------------------------------------------
+        // 4. BÁN HÀNG
+        // ---------------------------------------------------------
+        System.out.println("\n--- BUOC 4: XU LY GIAO DICH BAN XE ---");
+        System.out.println("Khach hang quyet dinh mua 1 chiec Vision Xanh Den (Ma VIN: " + bike1.getVin() + ").");
+        
+        // Cap nhat trang thai chiec xe bike1 thanh SOLD (Da ban)
+        bike1.setStatusSold();
+        
+        // Tao don hang chi tiet va luu vao lich su mua hang cua khach
+        SaleOrderDetail sale1 = new SaleOrderDetail(khachHang1.getId(), bike1.getVin(), 36000000);
+        khachHang1.updateVehicleCount(); // Tang so luong xe da mua
+        khachHang1.updatePurchaseHistory(sale1);
+        
+        System.out.println("-> Giao dich thanh cong! Trang thai xe " + bike1.getVin() + " hien tai: " + bike1.getStatus());
+
+
+        // ---------------------------------------------------------
+        // 4.1. KIEM TRA LAI KHO SAU KHI BAN 
+        // ---------------------------------------------------------
+        System.out.println("\n--- BUOC 4.1: KIEM TRA LAI KHO SAU KHI BAN ---");
+        System.out.println("Kiem tra xem chiec Vision Xanh Den con lai (VIN-V02) co bi anh huong khong:");
+        
+        // Cách 1: In toàn bộ danh sách xe trong kho 
+        //khoXe.showListMotor(); // TEST OK
+        
+        // Cách 2: lọc riêng dòng Vision 
+        wareHouse.checkStatus("Vision", khoXe); //TEST OK
+
+
+        // ---------------------------------------------------------
+        // 5. BẢO HÀNH
+        // ---------------------------------------------------------
+        System.out.println("\n--- BƯỚC 5: ĐĂNG KÝ VÀ GHI NHẬN BẢO HÀNH ---");
+        // Cấp sổ bảo hành 3 năm
+        WarrantyBook warrantyBook = new WarrantyBook(bike1.getVin(), khachHang1.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
+        
+        // Ghi nhận 1 lần khách mang xe đến bảo dưỡng sau đó
+        WarrantyVisit visit1 = new WarrantyVisit(1, 1, LocalDate.now().plusMonths(3), 1500, "Bảo dưỡng định kỳ lần 1");
+        visit1.setTechnicianNotes("Thay nhớt máy, kiểm tra phanh, động cơ hoạt động tốt.");
+        
+        khachHang1.updateWarrantyVisit(visit1);
+        
+        System.out.println("Lịch sử bảo dưỡng của xe " + bike1.getVin() + ":");
+        khachHang1.showWarrantyHistory();
+
+        System.out.println("\n======================================================");
+        System.out.println("                    HOÀN TẤT DEMO                     ");
+        System.out.println("======================================================");
     }
 }
