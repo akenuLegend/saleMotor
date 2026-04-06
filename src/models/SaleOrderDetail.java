@@ -1,12 +1,28 @@
 package models;
+import java.time.LocalDate;
+import java.sql.Date;
 
 public class SaleOrderDetail extends SaleOrder {
     private String vin;
     private int salePrice;
 
-    public SaleOrderDetail(int id, int orderId, String vin, int salePrice) {
-        super(id, orderId, new Date()); // Call the constructor of the parent class
+    public SaleOrderDetail(int cusId, String vin, int salePrice) {
+        super(cusId, LocalDate.now()); // Call the constructor of the parent class
         this.vin = vin;
         this.salePrice = salePrice;
     }
+
+    public String getVin() {
+        return vin;
+    }
+    public int getSalePrice() {
+        return salePrice;
+    }
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
+    public void setSalePrice(int salePrice) {
+        this.salePrice = salePrice;
+    }
+
 }

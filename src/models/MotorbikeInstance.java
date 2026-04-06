@@ -1,4 +1,5 @@
 package models;
+import java.time.LocalDate;
 import java.sql.Date;
 
 import models.MotorbikeVersion;
@@ -11,22 +12,18 @@ public class MotorbikeInstance {
     private String engineNumber;
     private Status status;
     private MotorbikeVersion version;
-    private Date importDate;
+    private LocalDate importDate;
 
-    public MotorbikeInstance(String vin, String engineNumber,MotorbikeVersion version, Date importDate) {
+    public MotorbikeInstance(String vin, String engineNumber,MotorbikeVersion version, LocalDate importDate) {
         this.vin = vin;
         this.engineNumber = engineNumber;
         this.version=version;
         this.status = Status.IN_STOCK;
         this.importDate = importDate;
-
     }
     public MotorbikeVersion getversion(){
         return version;
     }
-    public String getVin() { return vin; }
-    public Status getStatus() { return status; }
-    public void setStatus(Status status) { this.status = status; }
 
     @Override
     public String toString() {
@@ -34,4 +31,48 @@ public class MotorbikeInstance {
         " | bikename: " + version.getmodel().getmodelname() +
          " | Color: " + version.getcolor() + " | Status: " + status;
     }
+
+
+    public void showInforMotor() {
+        System.out.println("Thông tin xe máy:");
+        System.out.println("VIN: " + vin);
+        System.out.println("Số máy: " + engineNumber);
+        System.out.println("Phiên bản: " + version.getmodel().getmodelname() + " - " + version.getcolor());
+        System.out.println("Trạng thái: " + status);
+    }
+
+
+    public void setVIN(String vin) {
+        this.vin = vin;
+    }
+    public void setEngineNumber(String engineNumber) {
+        this.engineNumber = engineNumber;
+    }
+    public void setVersion(MotorbikeVersion version) {
+        this.version = version;
+    }
+    public void setImportDate(LocalDate importDate) {
+        this.importDate = importDate;
+    }
+    public void setStatusSold() {
+        this.status = Status.SOLD;
+    }
+    public LocalDate getImportDate() {
+        return importDate;
+    }
+    public String getEngineNumber() {
+        return engineNumber;
+    }
+    public  Status getStatus() {
+        return status;
+    }
+
+    public String getVin() {
+        return vin;
+    }
+    public MotorbikeVersion getVersion() {
+        return version;
+    }
+
+
 }

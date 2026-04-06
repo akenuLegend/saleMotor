@@ -1,30 +1,19 @@
 package services;
 
-public class MotorImportService {
-  
-     private List<MotorbikeInstance> kho = new ArrayList<>();
+import models.MotorbikeInstance;
+import services.MotorImportService;
 
-    public void addMotorbike(MotorbikeInstance xe) {
-
-    }
-
-    public void showKho() {
-        for (MotorbikeInstance m : kho) {
-            System.out.println(m);
-        }
-    }
-
-    public void sellMotorbike(String vin, Customer c) {
-        for (MotorbikeInstance m : kho) {
-            if (m.getVin().equals(vin) && m.getStatus() == Status.IN_STOCK) {
-                m.setStatus(Status.SOLD);
-                System.out.println("Ban thanh cong!");
-                return;
+public class checkStatusWareHouse extends MotorImportService {
+    
+    public void checkStatus( String modelNameFindout, MotorImportService motorImportService) {
+        for (MotorbikeInstance motor : motorImportService.listMotor) {
+            if (motor.getVersion().getmodel().getmodelname().equals(modelNameFindout)) {
+                motor.showInforMotor();
+                return ;
             }
         }
+        System.out.println("Không tìm thấy mẫu xe " + modelNameFindout + " trong kho."); // Thông báo nếu không tìm thấy mẫu xe
+        
     }
 
-    public void addMaintenance(String vin, String note) {
-        System.out.println("Bao hanh: " + vin + " - " + note);
-    }
 }

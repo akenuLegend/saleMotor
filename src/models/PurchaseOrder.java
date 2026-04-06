@@ -1,4 +1,6 @@
 package models;
+import java.time.LocalDate;
+import java.sql.Date;
 
 enum Status {
     IN_STOCK, SOLD //các giá trị cố định của kiểu status
@@ -6,14 +8,13 @@ enum Status {
 public class PurchaseOrder {
     private int id;
     private String supplier;
-    private Date orderDate;
+    private LocalDate orderDate;
     private Status status;
 
-    public PurchaseOrder(int id, String supplier, Date orderDate, int totalAmount) {
+    public PurchaseOrder(int id, String supplier, LocalDate orderDate) {
         this.id = id;
         this.supplier = supplier;
         this.orderDate = orderDate;
-        this.totalAmount = totalAmount;
-        this.status = Status.COMPLETED;
+        this.status = Status.IN_STOCK;
     }
 }
