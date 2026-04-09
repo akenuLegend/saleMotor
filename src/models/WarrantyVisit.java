@@ -7,15 +7,15 @@ import java.time.LocalDate;
 
 public class WarrantyVisit {
     private int id;
-    private int warrantyBookId;
+    private String vin;
     private LocalDate visitDate;
     private int kmReading;
     public static String[] error = { "loi dong co", " loi den tin hieu", "loi he thong dieu khien"};;
     private String technicianNotes;
 
-    public WarrantyVisit(int id, int warrantyBookId, LocalDate visitDate, int kmReading, String notes) {
+    public WarrantyVisit(int id, String vin , LocalDate visitDate, int kmReading, String notes) {
         this.id = id;
-        this.warrantyBookId = warrantyBookId;
+        this.vin = vin;
         this.visitDate = visitDate;
         this.kmReading = kmReading;
         this.technicianNotes = notes;
@@ -28,8 +28,8 @@ public class WarrantyVisit {
     public int getId() {
         return id;
     }
-    public int getWarrantyBookId() {
-        return warrantyBookId;
+    public String getVin() {
+        return vin;
     }
     public LocalDate getVisitDate() {
         return visitDate;
@@ -40,8 +40,8 @@ public class WarrantyVisit {
     public void setId(int id) {
         this.id = id;
     }
-    public void setWarrantyBookId(int warrantyBookId) {
-        this.warrantyBookId = warrantyBookId;
+    public void setVin(String vin) {
+        this.vin = vin;
     }
     public void setVisitDate(LocalDate visitDate) {
         this.visitDate = visitDate;

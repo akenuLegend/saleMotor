@@ -17,4 +17,23 @@ public class PurchaseOrder {
         this.orderDate = orderDate;
         this.status = Status.IN_STOCK;
     }
+
+    public int getid() {
+        return id;
+    }
+    public void setid(int id) {
+        this.id = id;
+    }
+    public String getsupplier() {
+        return supplier;
+    }
+    public void setsupplier(String supplier) {
+        this.supplier = supplier;
+    }
+    public LocalDate getorderDate() {
+        return orderDate;
+    }
+    public void setorderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
+    }
 }

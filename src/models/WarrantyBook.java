@@ -1,5 +1,4 @@
 package models;
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class WarrantyBook {
@@ -15,7 +14,28 @@ public class WarrantyBook {
         this.expDate = expDate;
     }
 
-    public void checkWarranty() {
-       
+    public String getVin() {
+        return vin;
+    }
+    public int getCustomerId() {
+        return customerId;
+    }
+    public LocalDate getIssueDate() {
+        return issueDate;
+    }
+    public LocalDate getExpDate() {
+        return expDate;
+    }
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+    public void setIssueDate(LocalDate issueDate) {
+        this.issueDate = issueDate;
+    }
+    public void setExpDate(LocalDate expDate) {
+        this.expDate = expDate;
     }
 }

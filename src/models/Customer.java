@@ -26,29 +26,29 @@ public class Customer {
         this.email = email;
     }
 
-    public void updateVehicleCount() {
-        numVehicle++;
-    }
+    // public void updateVehicleCount() {
+    //     numVehicle++;
+    // }
 
-    public void updateWarrantyVisit(WarrantyVisit visit) {
-        historyWar.add(visit);
-    }
+    // public void updateWarrantyVisit(WarrantyVisit visit) {
+    //     historyWar.add(visit);
+    // }
 
-    public void updatePurchaseHistory(SaleOrderDetail orderDetail) {
-        historyPurchase.add(orderDetail);
-    }
+    // public void updatePurchaseHistory(SaleOrderDetail orderDetail) {
+    //     historyPurchase.add(orderDetail);
+    // }
 
-    public void showPurchaseHistory() {
-        for (SaleOrderDetail order : historyPurchase) {
-            System.out.println("Ngày mua: " + order.getOrderDate() + ", VIN: " + order.getVin() + ", Giá bán: " + order.getSalePrice());
-        }
-    }
+    // public void showPurchaseHistory() {
+    //     for (SaleOrderDetail order : historyPurchase) {
+    //         System.out.println("Ngày mua: " + order.getOrderDate() + ", VIN: " + order.getVin() + ", Giá bán: " + order.getSalePrice());
+    //     }
+    // }
 
-    public void showWarrantyHistory() {
-        for (WarrantyVisit visit : historyWar) {
-            System.out.println("Ngày: " + visit.getVisitDate() + ", Ghi chú kỹ thuật viên: " + visit.getTechnicianNotes());
-        }
-    }
+    // public void showWarrantyHistory() {
+    //     for (WarrantyVisit visit : historyWar) {
+    //         System.out.println("Ngày: " + visit.getVisitDate() + ", Ghi chú kỹ thuật viên: " + visit.getTechnicianNotes());
+    //     }
+    // }
 
     public void showInforCustomer() {
         System.out.println("Tên khách hàng: " + fullName);

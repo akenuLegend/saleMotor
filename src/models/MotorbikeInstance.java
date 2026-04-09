@@ -10,7 +10,7 @@ enum Status {
 public class MotorbikeInstance {
     private String vin;
     private String engineNumber;
-    private Status status;
+    public Status status;
     private MotorbikeVersion version;
     private LocalDate importDate;
 

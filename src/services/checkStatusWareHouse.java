@@ -1,25 +1,23 @@
 package services;
 
 import models.MotorbikeInstance;
-import services.MotorImportService;
+import utils.MotorbikeInstanceDao;
+import java.util.ArrayList;
 
-public class checkStatusWareHouse extends MotorImportService {
+public class checkStatusWareHouse {
     
-    public void checkStatus( String modelNameFindout, MotorImportService motorImportService) {
-        boolean isFound = false; // Thêm biến để đánh dấu xem có tìm thấy xe nào không
+    public void checkStatus(String modelNameFindout) {
+        // Gọi DAO để lấy danh sách xe theo tên model từ Database
+        ArrayList<MotorbikeInstance> results = MotorbikeInstanceDao.getInstance().selectByModelName(modelNameFindout);
 
-        for (MotorbikeInstance motor : motorImportService.listMotor) {
-            if (motor.getVersion().getmodel().getmodelname().equals(modelNameFindout)) {
+        if (results.isEmpty()) {
+            System.out.println("Không tìm thấy mẫu xe " + modelNameFindout + " còn trong kho.");
+        } else {
+            System.out.println("Tìm thấy " + results.size() + " xe thuộc mẫu " + modelNameFindout + ":");
+            for (MotorbikeInstance motor : results) {
                 motor.showInforMotor();
-                isFound = true; // Đánh dấu là đã tìm thấy ít nhất 1 chiếc
-                // Không dùng return ở đây nữa để nó duyệt hết danh sách
+                System.out.println("----------------------------");
             }
         }
-        
-        // Sau khi duyệt hết kho, nếu biến isFound vẫn là false thì mới in thông báo lỗi
-        if (!isFound) {
-            System.out.println("Không tìm thấy mẫu xe " + modelNameFindout + " trong kho."); 
-        }
     }
-
 }
