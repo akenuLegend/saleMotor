@@ -21,7 +21,9 @@ public class CustomerService {
     public void addNewCustomer(Customer customer) {
         if (CustomerDao.getInstance().insert(customer) > 0) {
             System.out.println("success add");
-        } 
+        } else {
+            System.out.println("customer already exists!");
+        }
     }
 
     public void deleteCustomer(Customer customer) {
@@ -56,6 +58,9 @@ public class CustomerService {
         if (checkDetail > 0) {
             System.out.println("Lưu chi tiết đơn hàng cho xe " + detail.getVin() + " thành công!");
             
+        }
+        else {
+            System.out.println("Lỗi khi lưu chi tiết đơn hàng. Kiểm tra lại mã đơn hàng và VIN xe!");
         }
     }
 

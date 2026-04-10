@@ -23,7 +23,7 @@ public class WarrantyBookDao implements DAOInterface<WarrantyBook> {
         try {
             Connection con = JDBCUtil.getConnection();
             // Cột: vin, customer_id, issue_date, expiry_date
-            String sql = "INSERT INTO warranty_books (vin, customer_id, issue_date, expiry_date) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO warranty_books (vin, customer_id, issue_date, exp_date) VALUES (?, ?, ?, ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getVin());

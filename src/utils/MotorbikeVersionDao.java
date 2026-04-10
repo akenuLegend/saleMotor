@@ -27,7 +27,7 @@ public class MotorbikeVersionDao implements DAOInterface<MotorbikeVersion> {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, t.getmodel().getmodelId());
             st.setString(2, t.getcolor());
-            st.setString(3, t.getphankhoi());
+            st.setString(3, t.getengineCapacity());
             st.setString(4, t.getprice());
 
             ketQua = st.executeUpdate();

@@ -1,3 +1,14 @@
+-- -- Cách an toàn nhất: Thêm CASCADE để nó tự xóa các liên kết liên quan
+DROP TABLE IF EXISTS warranty_visits CASCADE;
+DROP TABLE IF EXISTS warranty_books CASCADE;
+DROP TABLE IF EXISTS sale_order_details CASCADE;
+DROP TABLE IF EXISTS sale_orders CASCADE;
+DROP TABLE IF EXISTS motorbike_instances CASCADE;
+DROP TABLE IF EXISTS motorbike_versions CASCADE;
+DROP TABLE IF EXISTS motorbike_models CASCADE;
+DROP TABLE IF EXISTS customers CASCADE;
+DROP TABLE IF EXISTS purchase_orders CASCADE;
+
 -- ==========================================
 -- 1. NHÓM QUẢN LÝ DANH MỤC XE (Dùng cho MotorImportService)
 -- ==========================================
@@ -16,7 +27,7 @@ CREATE TABLE motorbike_versions (
     version_id SERIAL PRIMARY KEY,
     model_id INT REFERENCES motorbike_models(model_id) ON DELETE CASCADE,
     color VARCHAR(30),
-    phan_khoi VARCHAR(20),
+    engine_capacity VARCHAR(20),
     price VARCHAR(50)
 );
 
@@ -37,7 +48,6 @@ CREATE TABLE motorbike_instances (
     vin VARCHAR(50) PRIMARY KEY,
     engine_number VARCHAR(50) UNIQUE,
     version_id INT REFERENCES motorbike_versions(version_id),
-    purchase_order_id INT REFERENCES purchase_orders(id), -- Liên kết với đơn nhập hàng
     import_date DATE DEFAULT CURRENT_DATE,
     status VARCHAR(20) DEFAULT 'IN_STOCK' -- Để checkStatusWareHouse lọc
 );
@@ -62,7 +72,7 @@ CREATE TABLE customers (
 
 -- Hóa đơn bán hàng
 CREATE TABLE sale_orders (
-    order_id SERIAL PRIMARY KEY,
+    order_id INT PRIMARY KEY,
     customer_id INT REFERENCES customers(id),
     order_date DATE DEFAULT CURRENT_DATE,
     payment_status VARCHAR(20) DEFAULT 'PAID'
@@ -71,7 +81,6 @@ CREATE TABLE sale_orders (
 -- Chi tiết từng xe trong hóa đơn
 CREATE TABLE sale_order_details (
     detail_id SERIAL PRIMARY KEY,
-    order_id INT REFERENCES sale_orders(order_id),
     vin VARCHAR(50) REFERENCES motorbike_instances(vin),
     sale_price INT
 );

@@ -12,8 +12,6 @@ public class Customer {
     private String address;
     private String email;
     public static int numVehicle = 0;
-    private ArrayList<SaleOrderDetail> historyPurchase = new ArrayList<>();
-    private ArrayList<WarrantyVisit> historyWar = new ArrayList<>();
 
     // Constructor khởi tạo khách hàng mới
     public Customer(String fullName, String phone, int id, String identityCard, LocalDate dateOfBirth, String address, String email) {
