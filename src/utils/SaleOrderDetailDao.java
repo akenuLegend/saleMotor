@@ -26,7 +26,7 @@ public class SaleOrderDetailDao implements DAOInterface<SaleOrderDetail> {
             
             PreparedStatement st = con.prepareStatement(sql);
             // Lấy order_id từ class cha SaleOrder (thông qua hàm getId)
-            st.setInt(1, t.getId()); 
+            st.setInt(1, t.getOrderId()); 
             st.setString(2, t.getVin());
             st.setInt(3, t.getSalePrice());
 

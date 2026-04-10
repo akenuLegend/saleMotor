@@ -22,7 +22,7 @@ public class MotorbikeVersionDao implements DAOInterface<MotorbikeVersion> {
         try {
             Connection con = JDBCUtil.getConnection();
             // Chú ý: Cột model_id lấy từ t.getmodel().getmodelId()
-            String sql = "INSERT INTO motorbike_versions (model_id, color, engine_capacity, price) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO motorbike_versions (model_id, color, phan_khoi, price) VALUES (?, ?, ?, ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, t.getmodel().getmodelId());

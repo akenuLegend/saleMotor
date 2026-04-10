@@ -23,7 +23,7 @@ public class SaleOrderDao implements DAOInterface<SaleOrder> {
         try {
             Connection con = JDBCUtil.getConnection();
             // Cột: id, customer_id, order_date, payment_status
-            String sql = "INSERT INTO sale_orders (id, customer_id, order_date, payment_status) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO sale_orders (order_id, customer_id, order_date, payment_status) VALUES (?, ?, ?, ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, t.getId());
