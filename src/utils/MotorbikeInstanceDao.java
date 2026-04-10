@@ -137,10 +137,7 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
                 rs.getString("brand"), "", ""
             );
             MotorbikeVersion version = new MotorbikeVersion(
-<<<<<<< HEAD
-=======
                 rs.getInt("version_id"),
->>>>>>> d1a30f83f5b03b137433901047a43da62d47d1e9
                 rs.getString("color"), rs.getString("engine_capacity"),
                 rs.getString("price"), model
             );

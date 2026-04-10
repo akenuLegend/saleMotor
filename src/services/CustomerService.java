@@ -26,7 +26,7 @@ public class CustomerService {
         }
     }
 
-    public void deleteCustomer(Customer customer) {
+    public void deleteCustomer(Customer customer) { //OK
         if (CustomerDao.getInstance().delete(customer) > 0) {
             System.out.println("success delete");
         } else {
@@ -140,7 +140,7 @@ public class CustomerService {
         try {
             Connection con = JDBCUtil.getConnection();
             String sql = "SELECT COUNT(*) FROM sale_orders o " +
-                        "JOIN sale_order_details d ON o.id = d.order_id " +
+                        "JOIN sale_order_details d ON o.order_id = d.order_id " +
                         "WHERE o.customer_id = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, customerId);
