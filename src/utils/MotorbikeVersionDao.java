@@ -21,7 +21,6 @@ public class MotorbikeVersionDao implements DAOInterface<MotorbikeVersion> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Chú ý: Cột model_id lấy từ t.getmodel().getmodelId()
             String sql = "INSERT INTO motorbike_versions (version_id, model_id, color, engine_capacity, price) VALUES (?, ?, ?, ?, ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
@@ -44,7 +43,7 @@ public class MotorbikeVersionDao implements DAOInterface<MotorbikeVersion> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Xóa dựa trên model_id và màu sắc (vì cậu không có ID phiên bản riêng)
+
             String sql = "DELETE FROM motorbike_versions WHERE model_id = ? AND color = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, t.getmodel().getmodelId());

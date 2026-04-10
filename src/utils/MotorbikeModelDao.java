@@ -49,7 +49,6 @@ public class MotorbikeModelDao implements DAOInterface<MotorbikeModel> {
 
     private static MotorbikeModelDao instance;
 
-    // 2. Hàm getInstance để các lớp khác gọi đến
     public static MotorbikeModelDao getInstance() {
         if (instance == null) {
             instance = new MotorbikeModelDao();

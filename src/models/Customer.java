@@ -13,7 +13,6 @@ public class Customer {
     private String email;
     public static int numVehicle = 0;
 
-    // Constructor khởi tạo khách hàng mới
     public Customer(String fullName, String phone, int id, String identityCard, LocalDate dateOfBirth, String address, String email) {
         this.fullName = fullName;
         this.phone = phone;
@@ -24,36 +23,12 @@ public class Customer {
         this.email = email;
     }
 
-    // public void updateVehicleCount() {
-    //     numVehicle++;
-    // }
-
-    // public void updateWarrantyVisit(WarrantyVisit visit) {
-    //     historyWar.add(visit);
-    // }
-
-    // public void updatePurchaseHistory(SaleOrderDetail orderDetail) {
-    //     historyPurchase.add(orderDetail);
-    // }
-
-    // public void showPurchaseHistory() {
-    //     for (SaleOrderDetail order : historyPurchase) {
-    //         System.out.println("Ngày mua: " + order.getOrderDate() + ", VIN: " + order.getVin() + ", Giá bán: " + order.getSalePrice());
-    //     }
-    // }
-
-    // public void showWarrantyHistory() {
-    //     for (WarrantyVisit visit : historyWar) {
-    //         System.out.println("Ngày: " + visit.getVisitDate() + ", Ghi chú kỹ thuật viên: " + visit.getTechnicianNotes());
-    //     }
-    // }
-
     public void showInforCustomer() {
-        System.out.println("Tên khách hàng: " + fullName);
-        System.out.println("Số điện thoại: " + phone);
-        System.out.println("Địa chỉ: " + address);
+        System.out.println("Name: " + fullName);
+        System.out.println("Phone: " + phone);
+        System.out.println("Address: " + address);
         System.out.println("Email: " + email);
-        System.out.println("Số lượng xe đã mua: " + numVehicle);
+        System.out.println("NumVehicle: " + numVehicle);
     }
 
     public int getId() { return id; }

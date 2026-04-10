@@ -26,18 +26,14 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Chỉ insert đúng các cột cần thiết
+
             String sql = "INSERT INTO motorbike_instances (version_id, vin, engine_number, status, import_date) VALUES (?, ?, ?, 'IN_STOCK', ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, t.getVersion().getVersionID());
             st.setString(2, t.getVin());
             st.setString(3, t.getEngineNumber());
-            
-            // Lấy version_id từ đối tượng model cha của MotorbikeVersion
-            // Vì MotorbikeVersion kế thừa MotorbikeModel, cậu dùng getmodelId() nhé
-            //st.setInt(3, t.getVersion().getmodelId()); 
-            
+
             st.setDate(4, Date.valueOf(t.getImportDate()));
 
             ketQua = st.executeUpdate();
@@ -53,7 +49,7 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Xóa dựa trên số khung (VIN)
+
             String sql = "DELETE FROM motorbike_instances WHERE vin = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getVin());
@@ -71,7 +67,7 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
     ArrayList<MotorbikeInstance> list = new ArrayList<>();
     try {
         Connection con = JDBCUtil.getConnection();
-        // Lệnh SQL JOIN 3 bảng để lấy đầy đủ thông tin từ Model đến Version
+
         String sql = "SELECT i.*, v.color, v.phan_khoi, v.price, m.model_name, m.brand, m.model_id " +
                      "FROM motorbike_instances i " +
                      "JOIN motorbike_versions v ON i.version_id = v.version_id " +
@@ -120,7 +116,7 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
     ArrayList<MotorbikeInstance> list = new ArrayList<>();
     try {
         Connection con = JDBCUtil.getConnection();
-        // JOIN 3 bảng để lọc theo tên Model và chỉ lấy những xe còn trong kho (IN_STOCK)
+
         String sql = "SELECT i.*, v.color, v.engine_capacity, v.price, m.model_name, m.brand, m.model_id " +
                      "FROM motorbike_instances i " +
                      "JOIN motorbike_versions v ON i.version_id = v.version_id " +
@@ -155,19 +151,19 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
     }
 
     public void updateStatus(MotorbikeInstance t) {
-    try {
-        Connection con = JDBCUtil.getConnection();
-        // Lệnh SQL để cập nhật trạng thái trong ổ cứng
-        String sql = "UPDATE motorbike_instances SET status = 'SOLD' WHERE vin = ?";
-        PreparedStatement st = con.prepareStatement(sql);
-        
-        st.setString(1, t.getVin());
+        try {
+            Connection con = JDBCUtil.getConnection();
 
-        st.executeUpdate();
-        JDBCUtil.closeConnection(con);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+            String sql = "UPDATE motorbike_instances SET status = 'SOLD' WHERE vin = ?";
+            PreparedStatement st = con.prepareStatement(sql);
+            
+            st.setString(1, t.getVin());
+
+            st.executeUpdate();
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     
