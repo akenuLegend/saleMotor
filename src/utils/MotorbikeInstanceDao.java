@@ -71,7 +71,7 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
     try {
         Connection con = JDBCUtil.getConnection();
         // Lệnh SQL JOIN 3 bảng để lấy đầy đủ thông tin từ Model đến Version
-        String sql = "SELECT i.*, v.color, v.phan_khoi, v.price, m.model_name, m.brand, m.model_id " +
+        String sql = "SELECT i.*, v.color, v.engine_capacity, v.price, m.model_name, m.brand, m.model_id " +
                      "FROM motorbike_instances i " +
                      "JOIN motorbike_versions v ON i.version_id = v.version_id " +
                      "JOIN motorbike_models m ON v.model_id = m.model_id";
@@ -91,7 +91,7 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
             // 2. Tạo Version
             MotorbikeVersion version = new MotorbikeVersion(
                 rs.getString("color"),
-                rs.getString("phan_khoi"),
+                rs.getString("engine_capacity"),
                 rs.getString("price"),
                 model
             );
@@ -119,7 +119,7 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
     try {
         Connection con = JDBCUtil.getConnection();
         // JOIN 3 bảng để lọc theo tên Model và chỉ lấy những xe còn trong kho (IN_STOCK)
-        String sql = "SELECT i.*, v.color, v.phan_khoi, v.price, m.model_name, m.brand, m.model_id " +
+        String sql = "SELECT i.*, v.color, v.engine_capacity, v.price, m.model_name, m.brand, m.model_id " +
                      "FROM motorbike_instances i " +
                      "JOIN motorbike_versions v ON i.version_id = v.version_id " +
                      "JOIN motorbike_models m ON v.model_id = m.model_id " +
@@ -135,7 +135,7 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
                 rs.getString("brand"), "", ""
             );
             MotorbikeVersion version = new MotorbikeVersion(
-                rs.getString("color"), rs.getString("phan_khoi"),
+                rs.getString("color"), rs.getString("engine_capacity"),
                 rs.getString("price"), model
             );
             MotorbikeInstance instance = new MotorbikeInstance(
