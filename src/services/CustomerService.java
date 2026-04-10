@@ -83,10 +83,11 @@ public class CustomerService {
     public void showPurchaseHistory(int customerId) {
         try {
             Connection con = JDBCUtil.getConnection();
+            // SỬA LẠI JOIN: o.order_id phải bằng d.order_id
             String sql = "SELECT o.order_date, d.vin, d.sale_price " +
-                        "FROM sale_orders o " +
-                        "JOIN sale_order_details d ON o.id = d.order_id " +
-                        "WHERE o.customer_id = ?";
+                         "FROM sale_orders o " +
+                         "JOIN sale_order_details d ON o.order_id = d.order_id " +
+                         "WHERE o.customer_id = ?";
             
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, customerId);
@@ -97,10 +98,11 @@ public class CustomerService {
             while (rs.next()) {
                 hasData = true;
                 System.out.println("Ngày mua: " + rs.getDate("order_date") + 
-                                " | VIN: " + rs.getString("vin") + 
-                                " | Giá bán: " + rs.getInt("sale_price"));
+                                   " | VIN: " + rs.getString("vin") + 
+                                   " | Giá bán: " + rs.getInt("sale_price"));
             }
             if (!hasData) System.out.println("Khách hàng này chưa mua xe nào.");
+            
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,7 +142,7 @@ public class CustomerService {
         try {
             Connection con = JDBCUtil.getConnection();
             String sql = "SELECT COUNT(*) FROM sale_orders o " +
-                        "JOIN sale_order_details d ON o.id = d.order_id " +
+                        "JOIN sale_order_details d ON o.order_id = d.order_id " +
                         "WHERE o.customer_id = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, customerId);

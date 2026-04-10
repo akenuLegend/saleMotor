@@ -6,11 +6,14 @@ public class SaleOrderDetail extends SaleOrder {
     private String vin;
     private int salePrice;
 
-    public SaleOrderDetail(int cusId, String vin, int salePrice) {
-        super(cusId, LocalDate.now()); // Call the constructor of the parent class
+    public SaleOrderDetail(int idOrder, int cusId, String vin, int salePrice) {
+        super(idOrder, cusId, LocalDate.now()); // Call the constructor of the parent class
         this.vin = vin;
         this.salePrice = salePrice;
     }
+        public int getOrderId() {
+            return super.getId(); // Lấy order_id từ class cha SaleOrder
+        }
 
     public String getVin() {
         return vin;

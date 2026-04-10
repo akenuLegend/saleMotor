@@ -12,16 +12,26 @@ public class WarrantyVisit {
     private int kmReading;
     public static String[] error = { "loi dong co", " loi den tin hieu", "loi he thong dieu khien"};;
     private String technicianNotes;
+    private int customerId;
 
-    public WarrantyVisit(int id, String vin , LocalDate visitDate, int kmReading, String notes) {
+    public WarrantyVisit(int id, String vin , LocalDate visitDate, int kmReading, String notes, int cusId) {
         this.id = id;
         this.vin = vin;
         this.visitDate = visitDate;
         this.kmReading = kmReading;
         this.technicianNotes = notes;
+        this.customerId = cusId;
+
     }
 
     // Các hàm Getter/Setter cơ bản
+    public int getCustomerId() {
+        return customerId;
+    }
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
     public void setTechnicianNotes(String notes) { this.technicianNotes = notes; }
 
     public String getTechnicianNotes() { return technicianNotes; }

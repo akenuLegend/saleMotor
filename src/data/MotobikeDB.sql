@@ -80,7 +80,7 @@ CREATE TABLE sale_orders (
 
 -- Chi tiết từng xe trong hóa đơn
 CREATE TABLE sale_order_details (
-    detail_id SERIAL PRIMARY KEY,
+    order_id INT REFERENCES sale_orders(order_id) ON DELETE CASCADE,
     vin VARCHAR(50) REFERENCES motorbike_instances(vin),
     sale_price INT
 );
@@ -96,6 +96,7 @@ CREATE TABLE warranty_books (
 -- Lịch sử các lần đi bảo dưỡng
 CREATE TABLE warranty_visits (
     id INT PRIMARY KEY,
+    customerId INT REFERENCES customers(id),
     vin VARCHAR(50) REFERENCES warranty_books(vin),
     visit_date DATE,
     km_reading INT,

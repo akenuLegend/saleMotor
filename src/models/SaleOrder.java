@@ -3,21 +3,25 @@ import java.time.LocalDate;
 import java.sql.Date;
 
 public class SaleOrder {
-    public  static int id = 0;
+    private int id;
     private int customerId;
     private LocalDate orderDate;
     private String paymentStatus;
 
-    public SaleOrder( int customerId, LocalDate orderDate) {
+    public SaleOrder(int id, int customerId, LocalDate orderDate) {
         this.customerId = customerId;
         this.orderDate = orderDate;
         this.paymentStatus = "PAID";
-        id++;
+        this.id = id;
     }
 
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCustomerId() {

@@ -22,12 +22,13 @@ public class SaleOrderDetailDao implements DAOInterface<SaleOrderDetail> {
         try {
             Connection con = JDBCUtil.getConnection();
 
-            String sql = "INSERT INTO sale_order_details ( vin, sale_price) VALUES ( ?, ?)";
+            String sql = "INSERT INTO sale_order_details (order_id, vin, sale_price) VALUES (?, ?, ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
             // Lấy order_id từ class cha SaleOrder (thông qua hàm getId)
-            st.setString(1, t.getVin());
-            st.setInt(2, t.getSalePrice());
+            st.setInt(1, t.getOrderId());
+            st.setString(2, t.getVin());
+            st.setInt(3, t.getSalePrice());
 
             ketQua = st.executeUpdate();
             JDBCUtil.closeConnection(con);
