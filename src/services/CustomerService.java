@@ -47,36 +47,35 @@ public class CustomerService {
 
     public void addNewSaleOrder(SaleOrder order) {
         if (SaleOrderDao.getInstance().insert(order) > 0) {
-            System.out.println("Tạo đơn hàng thành công! ID: " + order.getId());
+            System.out.println("Success: " + order.getId());
         } else {
-            System.out.println("Lỗi khi tạo đơn hàng trên hệ thống.");
+            System.out.println("Error occurred while creating the sales order.");
         }
     }
 
     public void addSaleOrderDetail(SaleOrderDetail detail) {
         int checkDetail = SaleOrderDetailDao.getInstance().insert(detail);
         if (checkDetail > 0) {
-            System.out.println("Lưu chi tiết đơn hàng cho xe " + detail.getVin() + " thành công!");
-            
+            System.out.println("Saved detail for VIN: " + detail.getVin() + " successfully!");
         }
         else {
-            System.out.println("Lỗi khi lưu chi tiết đơn hàng. Kiểm tra lại mã đơn hàng và VIN xe!");
+            System.out.println("Error occurred while saving order detail. Please check the order ID and VIN.");
         }
     }
 
     public void addNewWarrantyBook(WarrantyBook book) {
         if (WarrantyBookDao.getInstance().insert(book) > 0) {
-            System.out.println("Đã tạo sổ bảo hành cho xe VIN: " + book.getVin());
+            System.out.println("Success: Warranty book created for VIN: " + book.getVin());
         } else {
-            System.out.println("Lỗi: Không thể tạo sổ bảo hành. Kiểm tra xem VIN và Customer ID đã tồn tại chưa!");
+            System.out.println("Error: Failed to create warranty book. Please check if the VIN and Customer ID already exist.");
         }
     }
 
     public void addNewWarrantyVisit(WarrantyVisit visit) {
     if (WarrantyVisitDao.getInstance().insert(visit) > 0) {
-        System.out.println("Ghi nhận lịch sử bảo hành ID: " + visit.getId() + " thành công!");
+        System.out.println("Success: Warranty visit recorded for VIN: " + visit.getVin());
     } else {
-        System.out.println("Lỗi: Không thể ghi nhận lịch sử bảo hành. Kiểm tra lại mã sổ bảo hành!");
+        System.out.println("Error: Failed to record warranty visit. Please check the warranty book ID.");
     }
     }
 
@@ -93,15 +92,15 @@ public class CustomerService {
             st.setInt(1, customerId);
             ResultSet rs = st.executeQuery();
 
-            System.out.println("--- LỊCH SỬ MUA HÀNG (Khách hàng ID: " + customerId + ") ---");
+            System.out.println("--- Purchase History (Customer ID: " + customerId + ") ---");
             boolean hasData = false;
             while (rs.next()) {
                 hasData = true;
-                System.out.println("Ngày mua: " + rs.getDate("order_date") + 
+                System.out.println("Purchase Date: " + rs.getDate("order_date") + 
                                    " | VIN: " + rs.getString("vin") + 
-                                   " | Giá bán: " + rs.getInt("sale_price"));
+                                   " | Sale Price: " + rs.getInt("sale_price"));
             }
-            if (!hasData) System.out.println("Khách hàng này chưa mua xe nào.");
+            if (!hasData) System.out.println("This customer has not purchased any vehicles.");
             
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -122,15 +121,15 @@ public class CustomerService {
             st.setInt(1, customerId);
             ResultSet rs = st.executeQuery();
 
-            System.out.println("--- LỊCH SỬ BẢO HÀNH (Khách hàng ID: " + customerId + ") ---");
+            System.out.println("--- Warranty History (Customer ID: " + customerId + ") ---");
             boolean hasData = false;
             while (rs.next()) {
                 hasData = true;
-                System.out.println("Ngày: " + rs.getDate("visit_date") + 
-                                " | Xe VIN: " + rs.getString("vin") + 
-                                " | Ghi chú: " + rs.getString("technician_notes"));
+                System.out.println("Date: " + rs.getDate("visit_date") + 
+                                " | Vehicle VIN: " + rs.getString("vin") + 
+                                " | Technician Notes: " + rs.getString("technician_notes"));
             }
-            if (!hasData) System.out.println("Chưa có lịch sử bảo hành.");
+            if (!hasData) System.out.println("No warranty history found.");
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
             e.printStackTrace();
