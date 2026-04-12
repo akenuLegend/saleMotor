@@ -23,7 +23,7 @@ public class CustomerDao implements DAOInterface<Customer> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Cột: id, identity_card, full_name, date_of_birth, phone, address, email
+
             String sql = "INSERT INTO customers (id, identity_card, full_name, date_of_birth, phone, address, email) "
                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             

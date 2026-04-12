@@ -5,7 +5,7 @@ import java.sql.Date;
 import models.MotorbikeVersion;
 
 enum Status {
-    IN_STOCK, SOLD //các giá trị cố định của kiểu status
+    IN_STOCK, SOLD 
 }
 public class MotorbikeInstance {
     private String vin;
@@ -34,11 +34,11 @@ public class MotorbikeInstance {
 
 
     public void showInforMotor() {
-        System.out.println("Thông tin xe máy:");
+        System.out.println("Infor Motorbike:");
         System.out.println("VIN: " + vin);
-        System.out.println("Số máy: " + engineNumber);
-        System.out.println("Phiên bản: " + version.getmodel().getmodelname() + " - " + version.getcolor());
-        System.out.println("Trạng thái: " + status);
+        System.out.println("Engine: " + engineNumber);
+        System.out.println("Model: " + version.getmodel().getmodelname() + " - " + version.getcolor());
+        System.out.println("Status: " + status);
     }
 
 

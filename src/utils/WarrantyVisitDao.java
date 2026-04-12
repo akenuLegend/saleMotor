@@ -22,7 +22,7 @@ public class WarrantyVisitDao implements DAOInterface<WarrantyVisit> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Cột: id, vin, visit_date, km_reading, technician_notes
+  
             String sql = "INSERT INTO warranty_visits (customerId, id, vin, visit_date, km_reading, technician_notes) "
                        + "VALUES (?, ?, ?, ?, ?, ?)";
             

@@ -70,7 +70,6 @@ public class MotorImportService {
         } else {
             System.out.println("--- List Motorbikes ---");
             for (MotorbikeInstance i : list) {
-                // Sử dụng hàm toString() cậu đã viết rất đẹp ở trên
                 System.out.println(i.toString());
             }
         }

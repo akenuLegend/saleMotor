@@ -25,7 +25,7 @@ public class SaleOrderDetailDao implements DAOInterface<SaleOrderDetail> {
             String sql = "INSERT INTO sale_order_details (order_id, vin, sale_price) VALUES (?, ?, ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
-            // Lấy order_id từ class cha SaleOrder (thông qua hàm getId)
+      
             st.setInt(1, t.getOrderId());
             st.setString(2, t.getVin());
             st.setInt(3, t.getSalePrice());
@@ -43,7 +43,7 @@ public class SaleOrderDetailDao implements DAOInterface<SaleOrderDetail> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Xóa dựa trên VIN vì mỗi xe chỉ bán 1 lần (là duy nhất)
+  
             String sql = "DELETE FROM sale_order_details WHERE vin = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getVin());
