@@ -38,7 +38,7 @@ public class CustomerService {
         Customer c = CustomerDao.getInstance().selectById(id);
         if (c != null) {
             System.out.println("Customer found:");
-            c.showInforCustomer(); // Sử dụng hàm show thông tin cậu đã viết trong Model
+            c.showInforCustomer(); // Sử dụng hàm show thông tin đã viết trong Model
         } else {
             System.out.println("Customer not found!");
         }
@@ -82,7 +82,6 @@ public class CustomerService {
     public void showPurchaseHistory(int customerId) {
         try {
             Connection con = JDBCUtil.getConnection();
-            // SỬA LẠI JOIN: o.order_id phải bằng d.order_id
             String sql = "SELECT o.order_date, d.vin, d.sale_price " +
                          "FROM sale_orders o " +
                          "JOIN sale_order_details d ON o.order_id = d.order_id " +
@@ -111,7 +110,7 @@ public class CustomerService {
     public void showWarrantyHistory(int customerId) {
         try {
             Connection con = JDBCUtil.getConnection();
-            // Tìm các lượt visit dựa trên khách hàng sở hữu xe
+
             String sql = "SELECT v.visit_date, v.vin, v.technician_notes " +
                         "FROM warranty_visits v " +
                         "JOIN warranty_books b ON v.vin = b.vin " +

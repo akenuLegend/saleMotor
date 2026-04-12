@@ -36,6 +36,6 @@ public class MotorbikeModel {
     }
 
     public String tostring(){
-        return "mã xe : "+ modelId +" tên xe : "+modelName+" hãng xe : "+brand;
+        return "Id: " + modelId + " | Name: " + modelName + " | Brand: " + brand;
     }
 }

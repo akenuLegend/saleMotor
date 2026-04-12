@@ -22,13 +22,13 @@ public class WarrantyBookDao implements DAOInterface<WarrantyBook> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Cột: vin, customer_id, issue_date, expiry_date
+
             String sql = "INSERT INTO warranty_books (vin, customer_id, issue_date, exp_date) VALUES (?, ?, ?, ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getVin());
             st.setInt(2, t.getCustomerId());
-            // Chuyển LocalDate sang java.sql.Date
+ 
             st.setDate(3, Date.valueOf(t.getIssueDate()));
             st.setDate(4, Date.valueOf(t.getExpDate()));
 
@@ -45,7 +45,7 @@ public class WarrantyBookDao implements DAOInterface<WarrantyBook> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Xóa sổ bảo hành dựa trên số VIN (vì mỗi xe thường chỉ có 1 sổ)
+  
             String sql = "DELETE FROM warranty_books WHERE vin = ?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, t.getVin());

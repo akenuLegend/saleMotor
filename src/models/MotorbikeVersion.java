@@ -40,17 +40,13 @@ public class MotorbikeVersion extends MotorbikeModel {
     }
 
     public void showInforModels() {
-        System.out.println("Màu xe: " + color);
-        System.out.println("Phân khối: " + engineCapacity);
-        System.out.println("Giá: " + price);
-        System.out.println("Thông tin mẫu xe:");
-        System.out.println("  Mã xe: " + model.getmodelId());
-        System.out.println("  Tên xe: " + model.getmodelname());
-        System.out.println("  Hãng xe: " + model.getbrand());
+        System.out.println("Color: " + color);
+        System.out.println("Engine Capacity: " + engineCapacity);
+        System.out.println("Price: " + price);
+        System.out.println("Model Information:");
+        System.out.println("  Model ID: " + model.getmodelId());
+        System.out.println("  Model Name: " + model.getmodelname());
+        System.out.println("  Brand: " + model.getbrand());
     }
-
-    // public String tostring(){
-    //     return "mã xe : "+ modelId +" tên xe : "+modelName+" hãng xe : "+brand;
-    // }
 
 }

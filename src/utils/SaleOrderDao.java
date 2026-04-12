@@ -22,13 +22,13 @@ public class SaleOrderDao implements DAOInterface<SaleOrder> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            // Cột: id, customer_id, order_date, payment_status
+       
             String sql = "INSERT INTO sale_orders (order_id, customer_id, order_date, payment_status) VALUES (?, ?, ?, ?)";
             
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, t.getId());
             st.setInt(2, t.getCustomerId());
-            // Chuyển LocalDate sang sql.Date cho Postgres
+    
             st.setDate(3, Date.valueOf(t.getOrderDate()));
             st.setString(4, t.getPaymentStatus());
 

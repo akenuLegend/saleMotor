@@ -11,9 +11,9 @@ public class checkStatusWareHouse {
         ArrayList<MotorbikeInstance> results = MotorbikeInstanceDao.getInstance().selectByModelName(modelNameFindout);
 
         if (results.isEmpty()) {
-            System.out.println("Không tìm thấy mẫu xe " + modelNameFindout + " còn trong kho.");
+            System.out.println("Cannot find any " + modelNameFindout + " in the warehouse.");
         } else {
-            System.out.println("Tìm thấy " + results.size() + " xe thuộc mẫu " + modelNameFindout + ":");
+            System.out.println("Found " + results.size() + " " + modelNameFindout + "s in the warehouse:");
             for (MotorbikeInstance motor : results) {
                 motor.showInforMotor();
                 System.out.println("----------------------------");
