@@ -48,9 +48,6 @@ public class Main {
 
         
 
-        // SaleOrder order1 = new SaleOrder(222, java.time.LocalDate.of(2026, 4, 7)); // 
-        // SaleOrderDao.getInstance().insert(order1);
-        // MotorbikeInstanceDao.getInstance().updateStatus(bike2); // Cập nhật trạng thái xe đã bán
 
                 //4. Thêm purchase order (Hóa đơn nhập hàng)
         System.out.println("--- 4. TẠO HÓA ĐƠN NHẬP ---");
@@ -61,8 +58,14 @@ public class Main {
 
         System.out.println("--- 1. THÊM MODEL ---");
 
-        // // xem lịch sử mua hàng
-        // customerService.showPurchaseHistory(210);
+        MotorbikeModel model1 = new MotorbikeModel(1, "Air Blade", "Honda", "Sport", "Xe loai the thao"); 
+        MotorbikeModel model2 = new MotorbikeModel(2, "Vision", "Honda", "Pho thong", "Xe loai pho thong");
+        MotorbikeModel model3 = new MotorbikeModel(3, "SH", "Honda", "Cao cap", "Xe loai cao cap");
+        MotorbikeModel model4 = new MotorbikeModel(4, "Sirius", "Yamaha", "Xe so", "Xe pho thong gia re");
+        MotorbikeModelDao.getInstance().insert(model1);
+        MotorbikeModelDao.getInstance().insert(model2);
+        MotorbikeModelDao.getInstance().insert(model3);
+        MotorbikeModelDao.getInstance().insert(model4);
 
         // 2. Thêm 4 version (2 cho model 1, 2 cho model 2)
         System.out.println("--- 2. THÊM VERSION ---");
@@ -157,9 +160,7 @@ public class Main {
         System.out.println("Số lượng xe đã mua (Khách hàng ID: 222): " + vehicleCount);
 
         // xoa customer
-
-        // search khach hang
-        customerService.searchCustomerById(210);
+        
         
         JDBCUtil.closeConnection(connection);
 

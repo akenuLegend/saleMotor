@@ -67,13 +67,8 @@ public class MotorbikeInstanceDao implements DAOInterface<MotorbikeInstance> {
     ArrayList<MotorbikeInstance> list = new ArrayList<>();
     try {
         Connection con = JDBCUtil.getConnection();
-<<<<<<< HEAD
-        // Lệnh SQL JOIN 3 bảng để lấy đầy đủ thông tin từ Model đến Version
-        String sql = "SELECT i.*, v.color, v.engine_capacity, v.price, m.model_name, m.brand, m.model_id " +
-=======
 
         String sql = "SELECT i.*, v.color, v.phan_khoi, v.price, m.model_name, m.brand, m.model_id " +
->>>>>>> baf2e7e4b4ef3a8192c3f2dfb266420546b3ef0a
                      "FROM motorbike_instances i " +
                      "JOIN motorbike_versions v ON i.version_id = v.version_id " +
                      "JOIN motorbike_models m ON v.model_id = m.model_id";

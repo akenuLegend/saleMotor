@@ -9,7 +9,7 @@ public class JDBCUtil {
         Connection c = null;
         try {
             // 1. Đăng ký driver (Với bản mới có thể bỏ qua nhưng viết vào cho chắc)
-            DriverManager.registerDriver(new org.postgresql.Driver());
+            //DriverManager.registerDriver(new org.postgresql.Driver());
             
             // 2. Các thông số kết nối
             String url = "jdbc:postgresql://localhost:5432/MotobikeDB";
