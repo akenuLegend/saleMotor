@@ -131,8 +131,8 @@ INSERT INTO motorbike_instances (vin, engine_number, version_id, import_date, st
 
 -- 5. Thêm khách hàng (Customers)
 INSERT INTO customers (id, identity_card, full_name, date_of_birth, phone, address, email) VALUES
-(210, '079012345678', 'Trần Văn A', '1990-01-01', '0909123456', '123 Nguyen Trai, HN', 'trannv@example.com'),
-(222, '0516653126516', 'Dang Bao', '1990-01-01', '0901234567', '123 Nguyen Trai, HN', 'dangbao@test.com');
+(210, '079012345678', 'Cristiano Ronaldo', '1985-02-05', '0909123456', '19 Hoàng Diệu, Ba Đình, HN', 'trannv@example.com'),
+(222, '0516653126516', 'Lionel Messi', '1987-06-24', '0901234567', '91 Nguyễn Đình Chiểu, Quận 3, Saigon', 'dangbao@test.com');
 
 -- 6. Bán xe và tạo hóa đơn (Sale Orders & Details)
 INSERT INTO sale_orders (order_id, customer_id, order_date, payment_status) VALUES

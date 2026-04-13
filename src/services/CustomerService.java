@@ -26,7 +26,7 @@ public class CustomerService {
         }
     }
 
-    public void deleteCustomer(Customer customer) {
+    public void deleteCustomer(Customer customer) { //OK
         if (CustomerDao.getInstance().delete(customer) > 0) {
             System.out.println("success delete");
         } else {
@@ -153,6 +153,25 @@ public class CustomerService {
             e.printStackTrace();
         }
         return count;
+    }
+
+    // Hàm hỗ trợ GUI cho mục Khách hàng
+    public boolean addCustomerGUI(Customer customer) {
+        return CustomerDao.getInstance().insert(customer) > 0;
+    }
+
+    public boolean updateCustomerGUI(Customer customer) {
+        return CustomerDao.getInstance().update(customer) > 0;
+    }
+
+    public boolean deleteCustomerGUI(int id) {
+        // Tạo 1 object tạm có chứa ID để truyền vào hàm delete của DAO
+        Customer c = new Customer("", "", id, "", null, "", "");
+        return CustomerDao.getInstance().delete(c) > 0;
+    }
+
+    public java.util.ArrayList<Customer> getAllCustomers() {
+        return CustomerDao.getInstance().selectAll();
     }
 
 }

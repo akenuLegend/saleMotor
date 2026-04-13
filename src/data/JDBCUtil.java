@@ -14,7 +14,7 @@ public class JDBCUtil {
             // 2. Các thông số kết nối
             String url = "jdbc:postgresql://localhost:5432/MotobikeDB";
             String user = "postgres"; // Tên user mặc định của cậu
-            String pass = "123"; // Thay bằng mật khẩu lúc cậu cài Postgres
+            String pass = "1"; // Thay bằng mật khẩu lúc cậu cài Postgres
             
             // 3. Tạo kết nối
             c = DriverManager.getConnection(url, user, pass);
