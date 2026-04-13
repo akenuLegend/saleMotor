@@ -1,4 +1,6 @@
--- -- Cách an toàn nhất: Thêm CASCADE để nó tự xóa các liên kết liên quan
+-- ==========================================
+-- XÓA BẢNG NẾU ĐÃ TỒN TẠI ĐỂ RESET
+-- ==========================================
 DROP TABLE IF EXISTS warranty_visits CASCADE;
 DROP TABLE IF EXISTS warranty_books CASCADE;
 DROP TABLE IF EXISTS sale_order_details CASCADE;
@@ -10,7 +12,7 @@ DROP TABLE IF EXISTS customers CASCADE;
 DROP TABLE IF EXISTS purchase_orders CASCADE;
 
 -- ==========================================
--- 1. NHÓM QUẢN LÝ DANH MỤC XE (Dùng cho MotorImportService)
+-- 1. TẠO BẢNG
 -- ==========================================
 
 -- Lưu thông tin chung của mẫu xe
@@ -31,10 +33,6 @@ CREATE TABLE motorbike_versions (
     price VARCHAR(50)
 );
 
--- ==========================================
--- 2. NHÓM QUẢN LÝ KHO & NHẬP HÀNG (Dùng cho MotorImportService & checkStatusWareHouse)
--- ==========================================
-
 -- Lưu các đợt nhập hàng (PurchaseOrder)
 CREATE TABLE purchase_orders (
     id INT PRIMARY KEY,
@@ -47,15 +45,12 @@ CREATE TABLE purchase_orders (
 CREATE TABLE motorbike_instances (
     vin VARCHAR(50) PRIMARY KEY,
     engine_number VARCHAR(50) UNIQUE,
-    version_id INT ,
+    version_id INT REFERENCES motorbike_versions(version_id),
     import_date DATE DEFAULT CURRENT_DATE,
-    status VARCHAR(20) DEFAULT 'IN_STOCK' -- Để checkStatusWareHouse lọc
+    status VARCHAR(20) DEFAULT 'IN_STOCK'
 );
 
--- ==========================================
--- 3. NHÓM QUẢN LÝ KHÁCH HÀNG (Dùng cho CustomerService)
--- ==========================================
-
+-- Quản lý khách hàng
 CREATE TABLE customers (
     id INT PRIMARY KEY,
     identity_card VARCHAR(20) UNIQUE,
@@ -65,10 +60,6 @@ CREATE TABLE customers (
     address TEXT,
     email VARCHAR(100)
 );
-
--- ==========================================
--- 4. NHÓM GIAO DỊCH & BẢO HÀNH
--- ==========================================
 
 -- Hóa đơn bán hàng
 CREATE TABLE sale_orders (
@@ -102,3 +93,64 @@ CREATE TABLE warranty_visits (
     km_reading INT,
     technician_notes TEXT
 );
+
+-- ==========================================
+-- 2. THÊM DỮ LIỆU TỪ MÃ JAVA CỦA BẠN
+-- ==========================================
+
+-- 1. Tạo hóa đơn nhập hàng (Purchase Orders)
+INSERT INTO purchase_orders (id, supplier, order_date) VALUES 
+(101, 'Honda Vietnam Factory', '2026-04-01'),
+(102, 'Yamaha Japan Factory', '2026-04-02');
+
+-- 2. Thêm Model
+INSERT INTO motorbike_models (model_id, model_name, brand, type, description) VALUES
+(1, 'Air Blade', 'Honda', 'Sport', 'Xe loai the thao'),
+(2, 'Vision', 'Honda', 'Pho thong', 'Xe loai pho thong'),
+(3, 'SH', 'Honda', 'Cao cap', 'Xe loai cao cap'),
+(4, 'Sirius', 'Yamaha', 'Xe so', 'Xe pho thong gia re');
+
+-- 3. Thêm Version
+INSERT INTO motorbike_versions (version_id, model_id, color, engine_capacity, price) VALUES
+(1001, 1, 'red', '130cc', '35000000'),
+(1002, 1, 'white', '130cc', '46000000'),
+(2001, 2, 'blue', '170cc', '70000000'),
+(2002, 2, 'black', '210cc', '56000000'),
+(3001, 3, 'white', '150cc', '110000000'),
+(3002, 3, 'brown', '150cc', '105000000'),
+(4001, 4, 'white', '110cc', '23000000'),
+(4002, 4, 'black', '110cc', '22000000');
+
+-- 4. Nhập xe vào kho (Motorbike Instances)
+-- Lưu ý: Những xe nào đã bán qua SaleOrder mình sẽ set luôn trạng thái là 'SOLD' như trong code Java của bạn cập nhật
+INSERT INTO motorbike_instances (vin, engine_number, version_id, import_date, status) VALUES
+('VIN-AB-001', 'ENG-001', 1002, '2026-04-01', 'SOLD'),
+('VIN-VS-002', 'ENG-002', 2001, '2026-04-01', 'SOLD'),
+('VIN-SH-001', 'ESH-095', 3001, '2026-04-02', 'IN_STOCK'),
+('VIN-SI-001', 'ESH-011', 4002, '2026-04-02', 'IN_STOCK');
+
+-- 5. Thêm khách hàng (Customers)
+INSERT INTO customers (id, identity_card, full_name, date_of_birth, phone, address, email) VALUES
+(210, '079012345678', 'Trần Văn A', '1990-01-01', '0909123456', '123 Nguyen Trai, HN', 'trannv@example.com'),
+(222, '0516653126516', 'Dang Bao', '1990-01-01', '0901234567', '123 Nguyen Trai, HN', 'dangbao@test.com');
+
+-- 6. Bán xe và tạo hóa đơn (Sale Orders & Details)
+INSERT INTO sale_orders (order_id, customer_id, order_date, payment_status) VALUES
+(1, 210, '2026-04-06', 'PAID'),
+(2, 222, '2026-04-07', 'PAID');
+
+INSERT INTO sale_order_details (order_id, vin, sale_price) VALUES
+(1, 'VIN-AB-001', 60000000),
+(2, 'VIN-VS-002', 70000000);
+
+-- 7. Tạo sổ bảo hành (Warranty Books)
+-- Sử dụng CURRENT_DATE và hàm cộng năm trong PostgreSQL
+INSERT INTO warranty_books (vin, customer_id, issue_date, exp_date) VALUES
+('VIN-AB-001', 210, CURRENT_DATE, CURRENT_DATE + INTERVAL '2 years'),
+('VIN-VS-002', 222, CURRENT_DATE, CURRENT_DATE + INTERVAL '2 years');
+
+-- 8. Ghi nhận lịch sử bảo hành (Warranty Visits)
+-- Lấy ngày hiện tại cộng thêm số tháng như trong mã Java (LocalDate.now().plusMonths)
+INSERT INTO warranty_visits (id, customerId, vin, visit_date, km_reading, technician_notes) VALUES
+(1001, 210, 'VIN-AB-001', CURRENT_DATE + INTERVAL '3 months', 1500, 'Error_0 - Thay nhớt miễn phí lần 1'),
+(1002, 210, 'VIN-AB-001', CURRENT_DATE + INTERVAL '4 months', 3000, 'Error_2 - Thay thắng miễn phí lần 1');
