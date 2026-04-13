@@ -28,7 +28,6 @@ public class SaleOrderDao implements DAOInterface<SaleOrder> {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, t.getId());
             st.setInt(2, t.getCustomerId());
-    
             st.setDate(3, Date.valueOf(t.getOrderDate()));
             st.setString(4, t.getPaymentStatus());
 
