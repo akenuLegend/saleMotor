@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
         tabbedPane.addTab("KT tồn kho", new JPanel()); // Sẽ code sau
         tabbedPane.addTab("Bán hàng", new JPanel());   // Sẽ code sau
         tabbedPane.addTab("Bảo hành", new JPanel());   // Sẽ code sau
-        tabbedPane.addTab("Customer", new JPanel());   // Sẽ code sau
+        tabbedPane.addTab("Customer", new CustomerPanel());   // Sẽ code sau
 
         // Thêm tabbedPane vào Frame
         add(tabbedPane, BorderLayout.CENTER);
